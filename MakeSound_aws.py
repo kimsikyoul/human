@@ -205,16 +205,16 @@ def init():
 	#MakeSound('안녕하세요', 'hello', speed)
 	if mode == '1':
 		for i in range(fixed_bossNum):
-			MakeSound(fixed_bossData[i][0] + ' ' + basicSetting[1] + '분 전 ' + fixed_bossData[i][3], fixed_bossData[i][0] + '알림', speed)
-			MakeSound(fixed_bossData[i][0] + ' ' + basicSetting[3] + '분 전 ' + fixed_bossData[i][3], fixed_bossData[i][0] + '알림1', speed)
+			MakeSound(fixed_bossData[i][0] + ' ' + basicSetting[1] + 'minutes remaining' + fixed_bossData[i][3], fixed_bossData[i][0] + 'Alarm', speed)
+			MakeSound(fixed_bossData[i][0] + ' ' + basicSetting[3] + 'minutes remaining ' + fixed_bossData[i][3], fixed_bossData[i][0] + 'Alarm1', speed)
 			MakeSound(fixed_bossData[i][0] + ' ' + fixed_bossData[i][4], fixed_bossData[i][0] + '젠', speed)
 
 		for i in range(bossNum):
-			MakeSound(bossData[i][0] + ' ' + basicSetting[1] + '분 전 ' + bossData[i][3], bossData[i][0] + '알림', speed)
-			MakeSound(bossData[i][0] + ' ' + basicSetting[3] + '분 전 ' + bossData[i][3], bossData[i][0] + '알림1', speed)
-			MakeSound(bossData[i][0] + ' ' + bossData[i][4], bossData[i][0] + '젠', speed)
-			MakeSound(bossData[i][0] + ' 미입력 됐습니다.', bossData[i][0] + '미입력', speed)
-			MakeSound(bossData[i][0] + ' 멍 입니다.', bossData[i][0] + '멍', speed)	
+			MakeSound(bossData[i][0] + ' ' + basicSetting[1] + 'minutes remaining ' + bossData[i][3], bossData[i][0] + 'Alarm', speed)
+			MakeSound(bossData[i][0] + ' ' + basicSetting[3] + 'minutes remaining ' + bossData[i][3], bossData[i][0] + 'Alarm1', speed)
+			MakeSound(bossData[i][0] + ' ' + bossData[i][4], bossData[i][0] + 'respawn', speed)
+			MakeSound(bossData[i][0] + ' data is missing.', bossData[i][0] + 'datamiss', speed)
+			MakeSound(bossData[i][0] + ' fake spawn.', bossData[i][0] + 'fake', speed)	
 
 	else :
 		for i in range(len(ment_Data)):
