@@ -207,7 +207,7 @@ def init():
 		for i in range(fixed_bossNum):
 			MakeSound(fixed_bossData[i][0] + ' ' + basicSetting[1] + 'minutes remaining' + fixed_bossData[i][3], fixed_bossData[i][0] + 'Alarm', speed)
 			MakeSound(fixed_bossData[i][0] + ' ' + basicSetting[3] + 'minutes remaining ' + fixed_bossData[i][3], fixed_bossData[i][0] + 'Alarm1', speed)
-			MakeSound(fixed_bossData[i][0] + ' ' + fixed_bossData[i][4], fixed_bossData[i][0] + '젠', speed)
+			MakeSound(fixed_bossData[i][0] + ' ' + fixed_bossData[i][4], fixed_bossData[i][0] + 'respawned', speed)
 
 		for i in range(bossNum):
 			MakeSound(bossData[i][0] + ' ' + basicSetting[1] + 'minutes remaining ' + bossData[i][3], bossData[i][0] + 'Alarm', speed)
