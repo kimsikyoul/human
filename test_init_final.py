@@ -304,23 +304,23 @@ def init():
 		basicSetting.append(inputData[8][15:])     #basicSetting[1] : before_alert
 		basicSetting.append(inputData[10][11:])     #basicSetting[2] : mungChk1
 		basicSetting.append(inputData[9][16:])     #basicSetting[3] : before_alert1
-		basicSetting.append(inputData[14][14:16])  #basicSetting[4] : restarttime 시
-		basicSetting.append(inputData[14][17:])    #basicSetting[5] : restarttime 분
-		basicSetting.append(inputData[1][15:])     #basicSetting[6] : voice채널 ID
-		basicSetting.append(inputData[2][14:])     #basicSetting[7] : text채널 ID
-		basicSetting.append(inputData[3][16:])     #basicSetting[8] : 사다리 채널 ID
+		basicSetting.append(inputData[14][14:16])  #basicSetting[4] : restarttime hour
+		basicSetting.append(inputData[14][17:])    #basicSetting[5] : restarttime minutes
+		basicSetting.append(inputData[1][15:])     #basicSetting[6] : voiceChannel ID
+		basicSetting.append(inputData[2][14:])     #basicSetting[7] : textChannel ID
+		basicSetting.append(inputData[3][16:])     #basicSetting[8] : snakeChannel ID
 		basicSetting.append(inputData[13][14:])    #basicSetting[9] : !ㅂ 출력 수
 		basicSetting.append(inputData[17][11:])    #basicSetting[10] : json 파일명
 		basicSetting.append(inputData[4][17:])     #basicSetting[11] : 정산 채널 ID
 		basicSetting.append(inputData[16][12:])    #basicSetting[12] : sheet 이름
-		basicSetting.append(inputData[15][16:])    #basicSetting[13] : restart 주기
+		basicSetting.append(inputData[15][16:])    #basicSetting[13] : restart cycle
 		basicSetting.append(inputData[18][12:])    #basicSetting[14] : 시트 이름
 		basicSetting.append(inputData[19][12:])    #basicSetting[15] : 입력 셀
 		basicSetting.append(inputData[20][13:])    #basicSetting[16] : 출력 셀
-		basicSetting.append(inputData[12][13:])     #basicSetting[17] : 멍삭제횟수
-		basicSetting.append(inputData[5][14:])     #basicSetting[18] : kill채널 ID
-		basicSetting.append(inputData[6][16:])     #basicSetting[19] : racing 채널 ID
-		basicSetting.append(inputData[7][14:])     #basicSetting[20] : item 채널 ID
+		basicSetting.append(inputData[12][13:])     #basicSetting[17] : No Show Counts
+		basicSetting.append(inputData[5][14:])     #basicSetting[18] : kill Channel ID
+		basicSetting.append(inputData[6][16:])     #basicSetting[19] : racing Channel ID
+		basicSetting.append(inputData[7][14:])     #basicSetting[20] : item Channel ID
 		basicSetting.append(inputData[21][12:])     #basicSetting[21] : voice_use
 		basicSetting.append(inputData[11][11:])     #basicSetting[22] : mungChk2
 	except:
@@ -388,7 +388,7 @@ def init():
 		if basicSetting[20] != "":
 			basicSetting[20] = int(basicSetting[20])
 	except ValueError:
-		raise Exception("[test_setting.ini] 파일 양식을 확인하세요.")
+		raise Exception("Please, check [test_setting.ini] ")
 	
 	tmp_now = datetime.datetime.now() + datetime.timedelta(hours = int(basicSetting[0]))
 	
@@ -426,14 +426,14 @@ def init():
 		tmp_nick = []
 		tmp_len = tmp_bossData[j][1].find(':')
 		tmp_boss_name_list = tmp_bossData[j][0][11:].split(", ")
-		f.append(tmp_boss_name_list[0])         #bossData[0] : 보스명
+		f.append(tmp_boss_name_list[0])         #bossData[0] : Boss Name
 		if len(tmp_boss_name_list) > 1:
 			for nick in tmp_boss_name_list[1:]:
 				tmp_nick.append(nick)
 				tmp_nick.append(convertToInitialLetters(nick))			
 			boss_nick[tmp_boss_name_list[0]] = tmp_nick
-		f.append(tmp_bossData[j][1][10:tmp_len])  #bossData[1] : 시
-		f.append(tmp_bossData[j][2][13:])         #bossData[2] : 멍/미입력
+		f.append(tmp_bossData[j][1][10:tmp_len])  #bossData[1] : Hour
+		f.append(tmp_bossData[j][2][13:])         #bossData[2] : Noshow/Noinput
 		f.append(tmp_bossData[j][3][20:])         #bossData[3] : 분전 알림멘트
 		f.append(tmp_bossData[j][4][13:])         #bossData[4] : 젠 알림멘트
 		f.append(tmp_bossData[j][1][tmp_len+1:])  #bossData[5] : 분
@@ -1226,9 +1226,9 @@ class taskCog(commands.Cog):
 										tmp_bossTime[i] = bossTime[i] = nextTime = tmp_bossTime[i]+datetime.timedelta(hours=int(bossData[i][1]), minutes=int(bossData[i][5]))
 										tmp_bossTimeString[i] = bossTimeString[i] = nextTime.strftime('%H:%M:%S')
 										tmp_bossDateString[i] = bossDateString[i] = nextTime.strftime('%Y-%m-%d')
-										await self.bot.get_channel(channel).send("```" + bossData[i][0] + ' 멍 입니다.```')
+										await self.bot.get_channel(channel).send("```" + bossData[i][0] + ' Fake Spawn.```')
 										embed = discord.Embed(
-											description= '```다음 ' + bossData[i][0] + ' ' + bossTimeString[i] + '입니다.```',
+											description= '```Next Spawn Time is ' + bossData[i][0] + ' ' + bossTimeString[i]``',
 											color=0xff0000
 											)
 										await self.bot.get_channel(channel).send(embed=embed, tts=False)
