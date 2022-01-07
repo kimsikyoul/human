@@ -1421,7 +1421,7 @@ class mainCog(commands.Cog):
 			command_list += ','.join(command[15]) + '\n'     #!q
 			command_list += ','.join(command[16]) + ' [할말]\n'     #!v
 			command_list += ','.join(command[17]) + '\n'     #!리젠
-			command_list += ','.join(command[18]) + '\n'     #!현재시간
+			command_list += ','.join(command[18]) + '\n'     #!time
 			command_list += ','.join(command[24]) + '\n'     #!킬초기화
 			command_list += ','.join(command[25]) + '\n'     #!킬횟수 확인
 			command_list += ','.join(command[25]) + ' [아이디]\n'     #!킬
@@ -1448,7 +1448,7 @@ class mainCog(commands.Cog):
 			command_list += '[보스명]삭제\n'     
 			command_list += '[보스명]메모 [할말]\n'
 			embed = discord.Embed(
-					title = "----- 명령어 -----",
+					title = "----- Command -----",
 					description= '```' + command_list + '```',
 					color=0xff00ff
 					)
@@ -3685,9 +3685,9 @@ class mainCog(commands.Cog):
 					tmp_minute = int(tmp_boss_time[tmp_boss_time.rfind(":")+1:])
 					tmp_second = 0
 				if tmp_hour > 23 or tmp_hour < 0 or tmp_minute > 60 or tmp_second > 60:
-					return await ctx.send(f"**[{tmp_boss_name}]**의 올바른 시간(00:00:00 ~ 23:59:59)을 입력해주세요.")
+					return await ctx.send(f"**[{tmp_boss_name}]** correct time format is (00:00:00 ~ 23:59:59).")
 			except:
-				return await ctx.send(f"**[{tmp_boss_name}]**의 올바른 시간(00:00:00 ~ 23:59:59)을 입력해주세요. ")
+				return await ctx.send(f"**[{tmp_boss_name}]** correct time format is (00:00:00 ~ 23:59:59). ")
 
 			if "@" != boss_data[0]:
 				boss_data_dict[tmp_boss_name] = {"hour" : tmp_hour, "minute" : tmp_minute, "second" : tmp_second}
@@ -3727,7 +3727,7 @@ class mainCog(commands.Cog):
 					bossFlag0[i] = True
 				result_boss_name.append(bossData[i][0])
 
-		return await ctx.send(f"```[{', '.join(result_boss_name)}] 보스 [컷등록]이 완료되었습니다. [{command[22][0]}]으로 등록시간을 확인해보세요```", tts=False)
+		return await ctx.send(f"```[{', '.join(result_boss_name)}] Boss is added on the Time Table. [{command[22][0]}]으로 등록시간을 확인해보세요```", tts=False)
 
 	################ 예상등록 ################ 
 	@commands.command(name=command[44][0], aliases=command[44][1:])
@@ -4050,7 +4050,7 @@ class IlsangDistributionBot(commands.AutoShardedBot):
 
 				for i in range(bossNum):
 					################ 보스 컷처리 ################ 
-					if message.content.startswith(bossData[i][0] +'컷') or message.content.startswith(convertToInitialLetters(bossData[i][0] +'컷')) or message.content.startswith(bossData[i][0] +' 컷') or message.content.startswith(convertToInitialLetters(bossData[i][0] +' 컷')):
+					if message.content.startswith(bossData[i][0] +'DOWN') or message.content.startswith(convertToInitialLetters(bossData[i][0] +'컷')) or message.content.startswith(bossData[i][0] +' 컷') or message.content.startswith(convertToInitialLetters(bossData[i][0] +' Down')):
 						if hello.find('  ') != -1 :
 							bossData[i][6] = hello[hello.find('  ')+2:]
 							hello = hello[:hello.find('  ')]
@@ -4058,7 +4058,7 @@ class IlsangDistributionBot(commands.AutoShardedBot):
 							bossData[i][6] = ''
 
 						curr_now = datetime.datetime.now() + datetime.timedelta(hours = int(basicSetting[0]))
-						tmp_msg = bossData[i][0] +'컷'
+						tmp_msg = bossData[i][0] +'DOWN'
 						if len(hello) > len(tmp_msg) + 3 :
 							if hello.find(':') != -1 :
 								chkpos = hello.find(':')
