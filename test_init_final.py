@@ -1403,7 +1403,7 @@ class mainCog(commands.Cog):
 			command_list += ','.join(command[5]) + ' ※ 관리자만 실행 가능\n'     #!소환
 			command_list += ','.join(command[6]) + '\n'     #!불러오기
 			command_list += ','.join(command[7]) + '\n'     #!초기화
-			command_list += ','.join(command[8]) + '\n'     #!명치
+			command_list += ','.join(command[8]) + '\n'     #!kick
 			command_list += ','.join(command[9]) + '\n'     #!재시작
 			command_list += ','.join(command[10]) + '\n'     #!미예약
 			command_list += ','.join(command[11]) + ' [인원] [금액]\n'     #!분배
@@ -2427,12 +2427,12 @@ class mainCog(commands.Cog):
 							if ouput_bossData[i][5] == 0 :
 								boss_information[cnt] = boss_information[cnt] + ouput_bossData[i][3] + ' ' + ouput_bossData[i][2] + ' : ' + ouput_bossData[i][0] + ' ' + ouput_bossData[i][6] + '\n'
 							else :
-								boss_information[cnt] = boss_information[cnt] + ouput_bossData[i][3] + ' ' + ouput_bossData[i][2] + ' : ' + ouput_bossData[i][0] + ' (미 ' + str(ouput_bossData[i][5]) + '회)' + ' ' + ouput_bossData[i][6] + '\n'
+								boss_information[cnt] = boss_information[cnt] + ouput_bossData[i][3] + ' ' + ouput_bossData[i][2] + ' : ' + ouput_bossData[i][0] + ' (No Input ' + str(ouput_bossData[i][5]) + 'Times)' + ' ' + ouput_bossData[i][6] + '\n'
 						else : 
 							if ouput_bossData[i][5] == 0 :
 								boss_information[cnt] = boss_information[cnt] + ouput_bossData[i][3] + ' ' + ouput_bossData[i][2] + ' : ' + ouput_bossData[i][0] + ' ' + ouput_bossData[i][6] + '\n'
 							else :
-								boss_information[cnt] = boss_information[cnt] + ouput_bossData[i][3] + ' ' + ouput_bossData[i][2] + ' : ' + ouput_bossData[i][0] + ' (멍 ' + str(ouput_bossData[i][5]) + '회)' + ' ' + ouput_bossData[i][6] + '\n'
+								boss_information[cnt] = boss_information[cnt] + ouput_bossData[i][3] + ' ' + ouput_bossData[i][2] + ' : ' + ouput_bossData[i][0] + ' (Fake ' + str(ouput_bossData[i][5]) + 'Times)' + ' ' + ouput_bossData[i][6] + '\n'
 
 			if len(boss_information) == 1 and len(tmp_boss_information) == 1:
 				###########################
@@ -2610,12 +2610,12 @@ class mainCog(commands.Cog):
 							if ouput_bossData[i][5] == 0 :
 								boss_information[cnt] = boss_information[cnt] + ouput_bossData[i][3] + ' ' + ouput_bossData[i][2] + ' : ' + ouput_bossData[i][0] + ' ' + ouput_bossData[i][6] + '\n'
 							else :
-								boss_information[cnt] = boss_information[cnt] + ouput_bossData[i][3] + ' ' + ouput_bossData[i][2] + ' : ' + ouput_bossData[i][0] + ' (미 ' + str(ouput_bossData[i][5]) + '회)' + ' ' + ouput_bossData[i][6] + '\n'
+								boss_information[cnt] = boss_information[cnt] + ouput_bossData[i][3] + ' ' + ouput_bossData[i][2] + ' : ' + ouput_bossData[i][0] + ' (No Input ' + str(ouput_bossData[i][5]) + 'Times)' + ' ' + ouput_bossData[i][6] + '\n'
 						else : 
 							if ouput_bossData[i][5] == 0 :
 								boss_information[cnt] = boss_information[cnt] + ouput_bossData[i][3] + ' ' + ouput_bossData[i][2] + ' : ' + ouput_bossData[i][0] + ' ' + ouput_bossData[i][6] + '\n'
 							else :
-								boss_information[cnt] = boss_information[cnt] + ouput_bossData[i][3] + ' ' + ouput_bossData[i][2] + ' : ' + ouput_bossData[i][0] + ' (멍 ' + str(ouput_bossData[i][5]) + '회)' + ' ' + ouput_bossData[i][6] + '\n'
+								boss_information[cnt] = boss_information[cnt] + ouput_bossData[i][3] + ' ' + ouput_bossData[i][2] + ' : ' + ouput_bossData[i][0] + ' (Fake ' + str(ouput_bossData[i][5]) + 'Times)' + ' ' + ouput_bossData[i][6] + '\n'
 
 			###########################고정보스출력
 			if len(fixedboss_information[0]) != 0:
@@ -2624,7 +2624,7 @@ class mainCog(commands.Cog):
 				fixedboss_information[0] = '``` ```'
 	
 			embed = discord.Embed(
-					title = "----- 고 정 보 스 -----",
+					title = "----- Fixed Time Boss -----",
 					description= fixedboss_information[0],
 					color=0x0000ff
 					)
@@ -2649,7 +2649,7 @@ class mainCog(commands.Cog):
 				boss_information[0] = '``` ```'
 
 			embed = discord.Embed(
-					title = "----- 보스탐 정보 -----",
+					title = "----- Boss Time Table -----",
 					description= boss_information[0],
 					color=0x0000ff
 					)
@@ -2677,7 +2677,7 @@ class mainCog(commands.Cog):
 				tmp_boss_information[0] = '``` ```'
 
 			embed = discord.Embed(
-				title = "----- 미예약 보스 -----",
+				title = "----- Unreserved Boss -----",
 				description= tmp_boss_information[0],
 				color=0x0000ff
 				)
@@ -2841,7 +2841,7 @@ class mainCog(commands.Cog):
 			race_val = []
 			random_pos = []
 			racing_result = []
-			output = ':camera: :camera: :camera: 신나는 레이싱! :camera: :camera: :camera:\n'
+			output = ':camera: :camera: :camera: Racing! :camera: :camera: :camera:\n'
 			#racing_unit = [':giraffe:', ':elephant:', ':tiger2:', ':hippopotamus:', ':crocodile:',':leopard:',':ox:', ':sheep:', ':pig2:',':dromedary_camel:',':dragon:',':rabbit2:'] #동물스킨
 			#racing_unit = [':red_car:', ':taxi:', ':bus:', ':trolleybus:', ':race_car:', ':police_car:', ':ambulance:', ':fire_engine:', ':minibus:', ':truck:', ':articulated_lorry:', ':tractor:', ':scooter:', ':manual_wheelchair:', ':motor_scooter:', ':auto_rickshaw:', ':blue_car:', ':bike:', ':helicopter:', ':steam_locomotive:']  #탈것스킨
 			#random.shuffle(racing_unit) 
@@ -2895,13 +2895,13 @@ class mainCog(commands.Cog):
 				for i in range(len(racing_member)):
 					output +=  str_racing_field[i] + '\n'
 
-				result_race = await ctx.send(output + ':traffic_light: 3초 후 경주가 시작됩니다!')
+				result_race = await ctx.send(output + ':traffic_light: Three!')
 				await asyncio.sleep(1)
-				await result_race.edit(content = output + ':traffic_light: 2초 후 경주가 시작됩니다!')
+				await result_race.edit(content = output + ':traffic_light: Two!')
 				await asyncio.sleep(1)
-				await result_race.edit(content = output + ':traffic_light: 1초 후 경주가 시작됩니다!')
+				await result_race.edit(content = output + ':traffic_light: ONE!')
 				await asyncio.sleep(1)
-				await result_race.edit(content = output + ':checkered_flag:  경주 시작!')								
+				await result_race.edit(content = output + ':checkered_flag:  Start!')								
 
 				for i in range(len(racing_member)):
 					test = random.sample(range(2,field_size-2), race_info[i][2])
@@ -2913,9 +2913,9 @@ class mainCog(commands.Cog):
 
 				for j in range(len(random_pos[0])):
 					if j%2 == 0:
-						output =  ':camera: :camera_with_flash: :camera: 신나는 레이싱! :camera_with_flash: :camera: :camera_with_flash:\n'
+						output =  ':camera: :camera_with_flash: :camera: RACING! :camera_with_flash: :camera: :camera_with_flash:\n'
 					else :
-						output =  ':camera_with_flash: :camera: :camera_with_flash: 신나는 레이싱! :camera: :camera_with_flash: :camera:\n'
+						output =  ':camera_with_flash: :camera: :camera_with_flash: RACING! :camera: :camera_with_flash: :camera:\n'
 					str_racing_field = []
 					for i in range(len(racing_member)):
 						temp_pos = cur_pos[i]
@@ -2928,7 +2928,7 @@ class mainCog(commands.Cog):
 					for i in range(len(racing_member)):
 						output +=  str_racing_field[i] + '\n'
 					
-					await result_race.edit(content = output + ':checkered_flag:  경주 시작!')
+					await result_race.edit(content = output + ':checkered_flag:  START!')
 				
 				for i in range(len(racing_field)):
 					fr.append(race_info[i][0])
@@ -2966,7 +2966,7 @@ class mainCog(commands.Cog):
 					
 				#print(result)
 				await asyncio.sleep(1)
-				return await result_race.edit(content = output + ':tada: 경주 종료!\n' + result_str)
+				return await result_race.edit(content = output + ':tada: GAME OVER!\n' + result_str)
 		else:
 			return
 
@@ -3664,7 +3664,7 @@ class mainCog(commands.Cog):
 			return
 
 		if not args:
-			return await ctx.send('```보스타임 정보를 입력해주세요```', tts=False)
+			return await ctx.send('```Please, insert the Boss Data```', tts=False)
 
 		boss_data_list : list = args.split("\n")
 		boss_data_dict : dict = {}
@@ -4107,7 +4107,7 @@ class IlsangDistributionBot(commands.AutoShardedBot):
 							bossFlag0[i] = True
 
 						embed = discord.Embed(
-								description= '```다음 ' + bossData[i][0] + ' ' + bossTimeString[i] + '입니다.```',
+								description= '```Next Respawn for ' + bossData[i][0] + ' ' + bossTimeString[i] + '.```',
 								color=0xff0000
 								)
 						await self.get_channel(channel).send(embed=embed, tts=False)
@@ -4161,7 +4161,7 @@ class IlsangDistributionBot(commands.AutoShardedBot):
 								bossFlag0[i] = True
 
 							embed = discord.Embed(
-									description= '```다음 ' + bossData[i][0] + ' ' + bossTimeString[i] + '입니다.```',
+									description= '```Next Respawn for ' + bossData[i][0] + ' ' + bossTimeString[i] + '.```',
 									color=0xff0000
 									)
 							await self.get_channel(channel).send(embed=embed, tts=False)
@@ -4185,7 +4185,7 @@ class IlsangDistributionBot(commands.AutoShardedBot):
 									bossFlag0[i] = True
 
 								embed = discord.Embed(
-										description= '```다음 ' + bossData[i][0] + ' ' + bossTimeString[i] + '입니다.```',
+										description= '```Next Respawn for ' + bossData[i][0] + ' ' + bossTimeString[i] + '.```',
 										color=0xff0000
 										)
 								await self.get_channel(channel).send(embed=embed, tts=False)
