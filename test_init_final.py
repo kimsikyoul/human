@@ -551,7 +551,7 @@ channel = ''
 
 #mp3 파일 생성함수(gTTS 이용, 남성목소리)
 async def MakeSound(saveSTR, filename):
-	if aws_key != "AKIA6LZ34W6SKEAONUNU" and aws_secret_key != "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":
+	if aws_key != "" and aws_secret_key != "":
 		polly = boto3.client("polly", aws_access_key_id = aws_key, aws_secret_access_key = aws_secret_key, region_name = "eu-west-1")
 
 		s = '<speak><prosody rate="' + str(95) + '%">' +  saveSTR + '</prosody></speak>'
@@ -1442,11 +1442,11 @@ class mainCog(commands.Cog):
 			command_list += ','.join(command[34]) + ' ※ 관리자만 실행 가능\n\n'     #서버나가기
 			command_list += ','.join(command[22]) + '\n'     #보스탐
 			command_list += ','.join(command[23]) + '\n'     #!보스탐
-			command_list += '[보스명]컷 또는 [보스명]컷 0000, 00:00\n'  
-			command_list += '[보스명] 컷 또는 [보스명] 컷 0000, 00:00\n'   
-			command_list += '[보스명]멍 또는 [보스명]멍 0000, 00:00\n'     
+			command_list += '[보스명]down 또는 [보스명]down 0000, 00:00\n'  
+			command_list += '[보스명] down 또는 [보스명] down 0000, 00:00\n'   
+			command_list += '[보스명]fake 또는 [보스명]fake 0000, 00:00\n'     
 			command_list += '[보스명]예상 또는 [보스명]예상 0000, 00:00\n' 
-			command_list += '[보스명]삭제\n'     
+			command_list += '[보스명]del\n'     
 			command_list += '[보스명]메모 [할말]\n'
 			embed = discord.Embed(
 					title = "----- 명령어 -----",
