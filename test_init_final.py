@@ -3727,7 +3727,7 @@ class mainCog(commands.Cog):
 					bossFlag0[i] = True
 				result_boss_name.append(bossData[i][0])
 
-		return await ctx.send(f"```[{', '.join(result_boss_name)}] Boss is added on the Time Table. [{command[22][0]}]으로 등록시간을 확인해보세요```", tts=False)
+		return await ctx.send(f"```[{', '.join(result_boss_name)}] Boss is added on the Boss Time Table. [{command[22][0]}]으로 등록시간을 확인해보세요```", tts=False)
 
 	################ 예상등록 ################ 
 	@commands.command(name=command[44][0], aliases=command[44][1:])
@@ -3736,7 +3736,7 @@ class mainCog(commands.Cog):
 			return
 			
 		if not args:
-			return await ctx.send('```보스타임 정보를 입력해주세요```', tts=False)
+			return await ctx.send('```Please, insert the Boss Data```', tts=False)
 
 		boss_data_list : list = args.split("\n")
 		boss_data_dict : dict = {}
@@ -3757,9 +3757,9 @@ class mainCog(commands.Cog):
 					tmp_minute = int(tmp_boss_time[tmp_boss_time.rfind(":")+1:])
 					tmp_second = 0
 				if tmp_hour > 23 or tmp_hour < 0 or tmp_minute > 60 or tmp_second > 60:
-					return await ctx.send(f"**[{tmp_boss_name}]**의 올바른 시간(00:00:00 ~ 23:59:59)을 입력해주세요. ")
+					return await ctx.send(f"**[{tmp_boss_name}]** correct time format is (00:00:00 ~ 23:59:59). ")
 			except:
-				return await ctx.send(f"**[{tmp_boss_name}]**의 올바른 시간(00:00:00 ~ 23:59:59)을 입력해주세요. ")
+				return await ctx.send(f"**[{tmp_boss_name}]** correct time format is (00:00:00 ~ 23:59:59). ")
 
 			if "@" != boss_data[0]:
 				boss_data_dict[tmp_boss_name] = {"hour" : tmp_hour, "minute" : tmp_minute, "second" : tmp_second}
@@ -3789,7 +3789,7 @@ class mainCog(commands.Cog):
 					bossFlag0[i] = True
 				result_boss_name.append(bossData[i][0])
 
-		return await ctx.send(f"```[{', '.join(result_boss_name)}] 보스 [예상등록]이 완료되었습니다. [{command[22][0]}]으로 등록시간을 확인해보세요```", tts=False)
+		return await ctx.send(f"```[{', '.join(result_boss_name)}] Boss [Estimation] is Now Completed! [{command[22][0]}]으로 등록시간을 확인해보세요```", tts=False)
 
 	################ 추가등록 ################ 
 	@commands.command(name=command[45][0], aliases=command[45][1:])
@@ -4202,7 +4202,7 @@ class IlsangDistributionBot(commands.AutoShardedBot):
 						else:
 							bossData[i][6] = ''
 							
-						tmp_msg = bossData[i][0] +'Estimate'
+						tmp_msg = bossData[i][0] +'is set to Estimate Respawn time'
 						if len(hello) > len(tmp_msg) + 4 :
 							if hello.find(':') != -1 :
 								chkpos = hello.find(':')
