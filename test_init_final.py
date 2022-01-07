@@ -529,7 +529,7 @@ def init():
 		f = []
 
 	regenembed = discord.Embed(
-			title='----- 보스별 리스폰 시간 -----',
+			title='----- Boss Respawn Time -----',
 			description= ' ')
 	for i in range(len(regenTime)):
 		if outputTimeMin[i] == 0 :
@@ -616,7 +616,7 @@ async def dbSave():
 	
 	datelist = list(set(datelist1))
 
-	information1 = '----- 보스탐 정보 -----\n'
+	information1 = '----- Boss Information -----\n'
 	for timestring in sorted(datelist):
 		for i in range(bossNum):
 			if timestring == bossTime[i]:
@@ -787,10 +787,10 @@ async def dbLoad():
 				raise Exception(f"[fixed_boss.ini] 파일 {tmp_fixed_bossData[j][0]} 부분 양식을 확인하세요.")
 
 		LoadChk = 0
-		print ("<불러오기 완료>")
+		print ("<Loading Complete>")
 	else:
 		LoadChk = 1
-		print ("보스타임 정보가 없습니다.")
+		print ("Boss Time Info. is not available")
 
 #고정보스 날짜저장
 async def FixedBossDateSave():
@@ -817,7 +817,7 @@ async def LadderFunc(number, ladderlist, channelVal):
 	result_ladder = random.sample(ladderlist, number)
 	lose_member = [item for item in ladderlist if item not in result_ladder]
 	result_ladderSTR = ','.join(map(str, result_ladder))
-	embed = discord.Embed(title  = "🎲 사다리! 묻고 더블로 가!",color=0x00ff00)
+	embed = discord.Embed(title  = "🎲 SNAKE!",color=0x00ff00)
 	embed.add_field(name = "👥 참가자", value =  f"```fix\n{', '.join(ladderlist)}```", inline=False)
 	embed.add_field(name = "😍 당첨", value =  f"```fix\n{', '.join(result_ladder)}```")
 	embed.add_field(name = "😭 낙첨", value =  f"```{', '.join(lose_member)}```")
@@ -828,7 +828,7 @@ async def init_data_list(filename, first_line : str = "-----------"):
 	try :
 		contents = repo.get_contents(filename)
 		repo.update_file(contents.path, "deleted list " + str(filename), first_line, contents.sha)
-		print ('< 데이터 초기화 >')
+		print ('< Data has been reset >')
 	except Exception as e :
 		print ('save error!!')
 		print(e.args[1]['message']) # output: This repository is empty.
@@ -906,8 +906,8 @@ class taskCog(commands.Cog):
 			file = discord.File("./명치.JPG")
 			await ctx.send(file = file)
 		except:
-			await ctx.send( '< 보탐봇 명치 맞고 숨 고르기 중! 잠시만요! >', tts=False)
-		print("명치!")
+			await ctx.send( '< I will be back! >', tts=False)
+		print("Kick!")
 		await dbSave()
 		await data_list_Save("kill_list.ini", "-----척살명단-----", kill_Data)
 		await data_list_Save("item_list.ini", "-----아이템목록-----", item_Data)
@@ -919,7 +919,7 @@ class taskCog(commands.Cog):
 			await vc.disconnect(force=True)
 
 		if basicSetting[21] != "1":
-			print("명치복구완료!")
+			print("I am back NOW!")
 			await dbLoad()
 			await self.bot.get_channel(channel).send( '< 다시 왔습니다!(보이스 미사용) >', tts=False)
 
@@ -1066,7 +1066,7 @@ class taskCog(commands.Cog):
 					if basicSetting[3] != '0' and fixed_bossFlag0[i] == False:
 						if fixed_bossTime[i] <= priv0 and fixed_bossTime[i] > priv:
 							fixed_bossFlag0[i] = True
-							await self.bot.get_channel(channel).send("```" + fixed_bossData[i][0] + ' ' + basicSetting[3] + '분 전 ' + fixed_bossData[i][3] +' [' +  fixed_bossTime[i].strftime('%H:%M:%S') + ']```', tts=False)
+							await self.bot.get_channel(channel).send("```" + fixed_bossData[i][0] + ' ' + basicSetting[3] + 'minutes remaining ' + fixed_bossData[i][3] +' [' +  fixed_bossTime[i].strftime('%H:%M:%S') + ']```', tts=False)
 							try:
 								if basicSetting[21] == "1":
 									await PlaySound(self.bot.voice_clients[0], './sound/' + fixed_bossData[i][0] + '알림1.mp3')
@@ -1079,7 +1079,7 @@ class taskCog(commands.Cog):
 					if basicSetting[1] != '0' and fixed_bossFlag[i] == False:
 						if fixed_bossTime[i] <= priv and fixed_bossTime[i] > now and fixed_bossFlag0[i] == True :
 							fixed_bossFlag[i] = True
-							await self.bot.get_channel(channel).send("```" + fixed_bossData[i][0] + ' ' + basicSetting[1] + '분 전 ' + fixed_bossData[i][3] +' [' +  fixed_bossTime[i].strftime('%H:%M:%S') + ']```', tts=False)
+							await self.bot.get_channel(channel).send("```" + fixed_bossData[i][0] + ' ' + basicSetting[1] + 'minutes remaining ' + fixed_bossData[i][3] +' [' +  fixed_bossTime[i].strftime('%H:%M:%S') + ']```', tts=False)
 							try:
 								if basicSetting[21] == "1":
 									await PlaySound(self.bot.voice_clients[0], './sound/' + fixed_bossData[i][0] + '알림.mp3')
@@ -1115,9 +1115,9 @@ class taskCog(commands.Cog):
 						if bossTime[i] <= priv0 and bossTime[i] > priv:
 							bossFlag0[i] = True
 							if bossData[i][6] != '' :
-								await self.bot.get_channel(channel).send("```" + bossData[i][0] + ' ' + basicSetting[3] + '분 전 ' + bossData[i][3] + " [" +  bossTimeString[i] + "]" + '\n<' + bossData[i][6] + '>```', tts=False)
+								await self.bot.get_channel(channel).send("```" + bossData[i][0] + ' ' + basicSetting[3] + 'minutes remaining ' + bossData[i][3] + " [" +  bossTimeString[i] + "]" + '\n<' + bossData[i][6] + '>```', tts=False)
 							else :
-								await self.bot.get_channel(channel).send("```" + bossData[i][0] + ' ' + basicSetting[3] + '분 전 ' + bossData[i][3] + " [" +  bossTimeString[i] + "]```", tts=False)
+								await self.bot.get_channel(channel).send("```" + bossData[i][0] + ' ' + basicSetting[3] + 'minutes remaining ' + bossData[i][3] + " [" +  bossTimeString[i] + "]```", tts=False)
 							try:
 								if basicSetting[21] == "1":
 									await PlaySound(self.bot.voice_clients[0], './sound/' + bossData[i][0] + '알림1.mp3')
@@ -1131,9 +1131,9 @@ class taskCog(commands.Cog):
 						if bossTime[i] <= priv and bossTime[i] > now and bossFlag0[i] == True:
 							bossFlag[i] = True
 							if bossData[i][6] != '' :
-								await self.bot.get_channel(channel).send("```" + bossData[i][0] + ' ' + basicSetting[1] + '분 전 ' + bossData[i][3] + " [" +  bossTimeString[i] + "]" + '\n<' + bossData[i][6] + '>```', tts=False)
+								await self.bot.get_channel(channel).send("```" + bossData[i][0] + ' ' + basicSetting[1] + 'minutes remaining ' + bossData[i][3] + " [" +  bossTimeString[i] + "]" + '\n<' + bossData[i][6] + '>```', tts=False)
 							else :
-								await self.bot.get_channel(channel).send("```" + bossData[i][0] + ' ' + basicSetting[1] + '분 전 ' + bossData[i][3] + " [" +  bossTimeString[i] + "]```", tts=False)
+								await self.bot.get_channel(channel).send("```" + bossData[i][0] + ' ' + basicSetting[1] + 'minutes reamining ' + bossData[i][3] + " [" +  bossTimeString[i] + "]```", tts=False)
 							try:
 								if basicSetting[21] == "1":
 									await PlaySound(self.bot.voice_clients[0], './sound/' + bossData[i][0] + '알림.mp3')
@@ -1206,9 +1206,9 @@ class taskCog(commands.Cog):
 										tmp_bossTime[i] = bossTime[i] = nextTime = tmp_bossTime[i]+datetime.timedelta(hours=int(bossData[i][1]), minutes=int(bossData[i][5]))
 										tmp_bossTimeString[i] = bossTimeString[i] = nextTime.strftime('%H:%M:%S')
 										tmp_bossDateString[i] = bossDateString[i] = nextTime.strftime('%Y-%m-%d')
-										await self.bot.get_channel(channel).send("```" +  bossData[i][0] + ' 미입력 됐습니다.```', tts=False)
+										await self.bot.get_channel(channel).send("```" +  bossData[i][0] + ' No Data.```', tts=False)
 										embed = discord.Embed(
-											description= '```다음 ' + bossData[i][0] + ' ' + bossTimeString[i] + '입니다.```',
+											description= '```Next Boss Time is ' + bossData[i][0] + ' ' + bossTimeString[i] + '.```',
 											color=0xff0000
 											)
 										await self.bot.get_channel(channel).send(embed=embed, tts=False)
@@ -1226,9 +1226,9 @@ class taskCog(commands.Cog):
 										tmp_bossTime[i] = bossTime[i] = nextTime = tmp_bossTime[i]+datetime.timedelta(hours=int(bossData[i][1]), minutes=int(bossData[i][5]))
 										tmp_bossTimeString[i] = bossTimeString[i] = nextTime.strftime('%H:%M:%S')
 										tmp_bossDateString[i] = bossDateString[i] = nextTime.strftime('%Y-%m-%d')
-										await self.bot.get_channel(channel).send("```" + bossData[i][0] + ' 멍 입니다.```')
+										await self.bot.get_channel(channel).send("```" + bossData[i][0] + ' Fake Spawn.```')
 										embed = discord.Embed(
-											description= '```다음 ' + bossData[i][0] + ' ' + bossTimeString[i] + '입니다.```',
+											description= '```Next Boss Time is ' + bossData[i][0] + ' ' + bossTimeString[i] + '.```',
 											color=0xff0000
 											)
 										await self.bot.get_channel(channel).send(embed=embed, tts=False)
@@ -1689,9 +1689,9 @@ class mainCog(commands.Cog):
 			await dbLoad()
 
 			if LoadChk == 0:
-				await ctx.send('<불러오기 완료>', tts=False)
+				await ctx.send('<Loading Complete>', tts=False)
 			else:
-				await ctx.send('<보스타임 정보가 없습니다.>', tts=False)
+				await ctx.send('<No Boss Time Data>', tts=False)
 		else:
 			return
 
@@ -1750,7 +1750,7 @@ class mainCog(commands.Cog):
 			await dbSave()
 
 			await ctx.send('< 초기화 완료 >', tts=False)
-			print ("< 초기화 완료 >")
+			print ("< Reset Complete >")
 		else:
 			return
 
@@ -1813,7 +1813,7 @@ class mainCog(commands.Cog):
 					tmp_boss_information[0] = '``` ```'
 
 				embed = discord.Embed(
-						title = "----- 미예약 보스 -----",
+						title = "----- Unreserved Boss -----",
 						description= tmp_boss_information[0],
 						color=0x0000ff
 						)
@@ -1828,7 +1828,7 @@ class mainCog(commands.Cog):
 					tmp_boss_information[0] = '``` ```'
 
 				embed = discord.Embed(
-					title = "----- 미예약 보스 -----",
+					title = "----- Unreserved Boss -----",
 					description= tmp_boss_information[0],
 					color=0x0000ff
 					)
@@ -2274,7 +2274,7 @@ class mainCog(commands.Cog):
 		if ctx.message.channel.id == basicSetting[7]:
 			curruntTime = datetime.datetime.now() + datetime.timedelta(hours = int(basicSetting[0]))
 			embed = discord.Embed(
-				title = '현재시간은 ' + curruntTime.strftime('%H') + '시 ' + curruntTime.strftime('%M') + '분 ' + curruntTime.strftime('%S')+ '초 입니다.',
+				title = 'Current Time is ' + curruntTime.strftime('%H') + 'h ' + curruntTime.strftime('%M') + 'm '+ curruntTime.strftime('%S')+ 's .',
 				color=0xff00ff
 				)
 			await ctx.send( embed=embed, tts=False)
@@ -2447,12 +2447,12 @@ class mainCog(commands.Cog):
 					tmp_boss_information[0] = '``` ```'
 
 				embed = discord.Embed(
-						title = "----- 보스탐 정보 -----",
+						title = "----- Boss Time Table -----",
 						description= boss_information[0],
 						color=0x0000ff
 						)
 				embed.add_field(
-						name="----- 미예약 보스 -----",
+						name="----- Unreserved Boss -----",
 						value= tmp_boss_information[0],
 						inline = False
 						)				
@@ -2465,7 +2465,7 @@ class mainCog(commands.Cog):
 					boss_information[0] = '``` ```'
 
 				embed = discord.Embed(
-						title = "----- 보스탐 정보 -----",
+						title = "----- Boss Time Table -----",
 						description= boss_information[0],
 						color=0x0000ff
 						)
@@ -2492,7 +2492,7 @@ class mainCog(commands.Cog):
 					tmp_boss_information[0] = '``` ```'
 
 				embed = discord.Embed(
-					title = "----- 미예약 보스 -----",
+					title = "----- Unreserved Boss -----",
 					description= tmp_boss_information[0],
 					color=0x0000ff
 					)
