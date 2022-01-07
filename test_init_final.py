@@ -2290,7 +2290,7 @@ class mainCog(commands.Cog):
 				sayMessage = " ".join(msg[1:])
 				contents = repo.get_contents("notice.ini")
 				repo.update_file(contents.path, "notice 등록", sayMessage, contents.sha)
-				await ctx.send( '< 공지 등록완료 >', tts=False)
+				await ctx.send( '< Notice posted >', tts=False)
 			else:
 				notice_initdata = repo.get_contents("notice.ini")
 				notice = base64.b64decode(notice_initdata.content)
@@ -2302,7 +2302,7 @@ class mainCog(commands.Cog):
 							)
 				else :
 					embed = discord.Embed(
-							description= '```등록된 공지가 없습니다.```',
+							description= '```No Notice.```',
 							color=0xff00ff
 							)
 				await ctx.send(embed=embed, tts=False)
@@ -4039,7 +4039,7 @@ class IlsangDistributionBot(commands.AutoShardedBot):
 				channel = basicSetting[7]
 				message = msg
 
-				for command_str in ["down", "fake", "est", "del", "메모", "카톡켬", "카톡끔"]:
+				for command_str in ["", "멍", "예상", "삭제", "메모", "카톡켬", "카톡끔"]:
 					if command_str in message.content:
 						tmp_msg : str = ""
 						for key, value in boss_nick.items():
