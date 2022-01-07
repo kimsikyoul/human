@@ -551,7 +551,7 @@ channel = ''
 
 #mp3 파일 생성함수(gTTS 이용, 남성목소리)
 async def MakeSound(saveSTR, filename):
-	if aws_key != "" and aws_secret_key != "":
+	if aws_key != "AKIA6LZ34W6SKEAONUNU" and aws_secret_key != "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":
 		polly = boto3.client("polly", aws_access_key_id = aws_key, aws_secret_access_key = aws_secret_key, region_name = "eu-west-1")
 
 		s = '<speak><prosody rate="' + str(95) + '%">' +  saveSTR + '</prosody></speak>'
