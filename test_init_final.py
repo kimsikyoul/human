@@ -326,7 +326,7 @@ def init():
 	except:
 		raise Exception("[test_setting.ini] 파일 양식을 확인하세요.")
 
-	############## 보탐봇 명령어 리스트 #####################
+	############## Human Bot Command List #####################
 	for i in range(len(command_inputData)):
 		tmp_command = command_inputData[i][12:].rstrip('\r')
 		fc = tmp_command.split(', ')
@@ -529,14 +529,14 @@ def init():
 		f = []
 
 	regenembed = discord.Embed(
-			title='----- 보스별 리스폰 시간 -----',
+			title='----- Boss Respawn Time -----',
 			description= ' ')
 	for i in range(len(regenTime)):
 		if outputTimeMin[i] == 0 :
-			regenembed.add_field(name=str(outputTimeHour[i]) + '시간', value= '```'+ ', '.join(map(str, sorted(regenbossName[i]))) + '```', inline=False)
+			regenembed.add_field(name=str(outputTimeHour[i]) + 'Hour', value= '```'+ ', '.join(map(str, sorted(regenbossName[i]))) + '```', inline=False)
 		else :
-			regenembed.add_field(name=str(outputTimeHour[i]) + '시간' + str(outputTimeMin[i]) + '분', value= '```' + ','.join(map(str, sorted(regenbossName[i]))) + '```', inline=False)
-	regenembed.set_footer(text = 'R : 멍 보스')
+			regenembed.add_field(name=str(outputTimeHour[i]) + 'Hour' + str(outputTimeMin[i]) + 'minute', value= '```' + ','.join(map(str, sorted(regenbossName[i]))) + '```', inline=False)
+	regenembed.set_footer(text = 'R : Fake Spawn')
 
 	##########################################################
 
@@ -559,7 +559,7 @@ async def MakeSound(saveSTR, filename):
 			TextType = "ssml",
 			Text=s,
 			OutputFormat="mp3",
-			VoiceId="Seoyeon")
+			VoiceId="Joanna")
 
 		stream = response.get("AudioStream")
 
