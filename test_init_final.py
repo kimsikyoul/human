@@ -903,7 +903,7 @@ class taskCog(commands.Cog):
 				t.cancel()
 		# await ctx.send( '< 보탐봇 명치 맞고 숨 고르기 중! 잠시만요! >', tts=False)
 		try:
-			file = discord.File("./명치.JPG")
+			file = discord.File("./명치.jpg")
 			await ctx.send(file = file)
 		except:
 			await ctx.send( '< I will be back! >', tts=False)
@@ -1397,9 +1397,9 @@ class mainCog(commands.Cog):
 	async def menu_(self, ctx):
 		if ctx.message.channel.id == basicSetting[7]:
 			command_list = ''
-			#command_list += ','.join(command[2]) + '\n'     #!설정확인
-			#command_list += ','.join(command[3]) + '\n'     #!채널확인
-			#command_list += ','.join(command[4]) + ' [채널명]\n'     #!채널이동
+			command_list += ','.join(command[2]) + '\n'     #!설정확인
+			command_list += ','.join(command[3]) + '\n'     #!채널확인
+			command_list += ','.join(command[4]) + ' [channel title]\n'     #!채널이동
 			command_list += ','.join(command[5]) + ' ※ Server Owner ONLY\n'     #!소환
 			#command_list += ','.join(command[6]) + '\n'     #!불러오기
 			command_list += ','.join(command[7]) + '\n'     #!초기화
@@ -1411,7 +1411,7 @@ class mainCog(commands.Cog):
 			command_list += ','.join(command[27]) + ' [racer1] [racer2]...(total 12 racers)\n'     #!경주
 			#command_list += ','.join(command[41]) + ' [추첨인원] (대기시간/초) *(메모)\n'    #!럭키박스
 			command_list += ','.join(command[35]) + ' [Sold Price] (Tax Rate)\n'     #!수수료
-			command_list += ','.join(command[36]) + ' [거래소금액] [실거래금액] (거래소세금)\n'     #!페이백
+			#command_list += ','.join(command[36]) + ' [거래소금액] [실거래금액] (거래소세금)\n'     #!페이백
 			#command_list += ','.join(command[13]) + ' [아이디]\n'     #!정산
 			#command_list += ','.join(command[14]) + ' 또는 ' + ','.join(command[14]) + ' 0000, 00:00\n'     #!보스일괄
 			#command_list += ','.join(command[40]) + ' 또는 ' + ','.join(command[40]) + ' 0000, 00:00\n'     #!멍일괄
@@ -1537,7 +1537,7 @@ class mainCog(commands.Cog):
 
 			if len(ch_information) == 1 and len(ch_voice_information) == 1:
 				embed = discord.Embed(
-					title = "----- 채널 정보 -----",
+					title = "----- Channel Information -----",
 					description = '',
 					color=0xff00ff
 					)
@@ -1555,7 +1555,7 @@ class mainCog(commands.Cog):
 				await ctx.send( embed=embed, tts=False)
 			else :
 				embed = discord.Embed(
-					title = "----- 채널 정보 -----\n< 택스트 채널 >",
+					title = "----- Channel Information -----\n< 택스트 채널 >",
 					description= '```' + ch_information[0] + '```',
 					color=0xff00ff
 					)
@@ -4050,7 +4050,7 @@ class IlsangDistributionBot(commands.AutoShardedBot):
 
 				for i in range(bossNum):
 					################ 보스 컷처리 ################ 
-					if message.content.startswith(bossData[i][0] +' DOWN') or message.content.startswith(convertToInitialLetters(bossData[i][0] +'컷')) or message.content.startswith(bossData[i][0] +' 컷') or message.content.startswith(convertToInitialLetters(bossData[i][0] +' down')):
+					if message.content.startswith(bossData[i][0] +'DOWN') or message.content.startswith(convertToInitialLetters(bossData[i][0] +'컷')) or message.content.startswith(bossData[i][0] +' 컷') or message.content.startswith(convertToInitialLetters(bossData[i][0] +' DOWN')):
 						if hello.find('  ') != -1 :
 							bossData[i][6] = hello[hello.find('  ')+2:]
 							hello = hello[:hello.find('  ')]
@@ -4114,7 +4114,7 @@ class IlsangDistributionBot(commands.AutoShardedBot):
 
 					################ 보스 멍 처리 ################ 
 
-					if message.content.startswith(bossData[i][0] +' FAKE') or message.content.startswith(bossData[i][0] +' fake'):
+					if message.content.startswith(bossData[i][0] +'FAKE') or message.content.startswith(bossData[i][0] +' FAKE'):
 						if hello.find('  ') != -1 :
 							bossData[i][6] = hello[hello.find('  ')+2:]
 							hello = hello[:hello.find('  ')]
@@ -4195,7 +4195,7 @@ class IlsangDistributionBot(commands.AutoShardedBot):
 						
 				################ 예상 보스 타임 입력 ################ 
 
-					if message.content.startswith(bossData[i][0] +' EST')  or message.content.startswith(bossData[i][0] +' est'):
+					if message.content.startswith(bossData[i][0] +'EST')  or message.content.startswith(bossData[i][0] +' EST'):
 						if hello.find('  ') != -1 :
 							bossData[i][6] = hello[hello.find('  ')+2:]
 							hello = hello[:hello.find('  ')]
@@ -4246,7 +4246,7 @@ class IlsangDistributionBot(commands.AutoShardedBot):
 							
 					################ 보스타임 삭제 ################
 						
-					if message.content == bossData[i][0] +' DEL' or message.content == bossData[i][0] +' del':
+					if message.content == bossData[i][0] +'DEL' or message.content == bossData[i][0] +' DEL':
 						bossTime[i] = datetime.datetime.now()+datetime.timedelta(days=365, hours = int(basicSetting[0]))
 						tmp_bossTime[i] =  datetime.datetime.now()+datetime.timedelta(days=365, hours = int(basicSetting[0]))
 						bossTimeString[i] = '99:99:99'
