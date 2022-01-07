@@ -529,14 +529,14 @@ def init():
 		f = []
 
 	regenembed = discord.Embed(
-			title='----- Boss Respawn Time -----',
+			title='----- Boss Appearance Interval -----',
 			description= ' ')
 	for i in range(len(regenTime)):
 		if outputTimeMin[i] == 0 :
-			regenembed.add_field(name=str(outputTimeHour[i]) + '시간', value= '```'+ ', '.join(map(str, sorted(regenbossName[i]))) + '```', inline=False)
+			regenembed.add_field(name=str(outputTimeHour[i]) + 'Hours', value= '```'+ ', '.join(map(str, sorted(regenbossName[i]))) + '```', inline=False)
 		else :
-			regenembed.add_field(name=str(outputTimeHour[i]) + '시간' + str(outputTimeMin[i]) + '분', value= '```' + ','.join(map(str, sorted(regenbossName[i]))) + '```', inline=False)
-	regenembed.set_footer(text = 'R : 멍 보스')
+			regenembed.add_field(name=str(outputTimeHour[i]) + 'Hours' + str(outputTimeMin[i]) + 'Minutes', value= '```' + ','.join(map(str, sorted(regenbossName[i]))) + '```', inline=False)
+	regenembed.set_footer(text = 'R : Can Fake Spawn')
 
 	##########################################################
 
@@ -623,14 +623,14 @@ async def dbSave():
 				if bossTimeString[i] != '99:99:99' or bossMungFlag[i] == True :
 					if bossMungFlag[i] == True :
 						if bossData[i][2] == '0' :
-							information1 += ' - ' + bossData[i][0] + '(' + bossData[i][1] + '.' + bossData[i][5] + ') : ' + tmp_bossTime[i].strftime('%H:%M:%S') + ' @ ' + tmp_bossTime[i].strftime('%Y-%m-%d') + ' (미입력 ' + str(bossMungCnt[i]) + '회)' + ' * ' + bossData[i][6] + '\n'
+							information1 += ' - ' + bossData[i][0] + '(' + bossData[i][1] + '.' + bossData[i][5] + ') : ' + tmp_bossTime[i].strftime('%H:%M:%S') + ' @ ' + tmp_bossTime[i].strftime('%Y-%m-%d') + ' (No Input ' + str(bossMungCnt[i]) + 'times)' + ' * ' + bossData[i][6] + '\n'
 						else : 
-							information1 += ' - ' + bossData[i][0] + '(' + bossData[i][1] + '.' + bossData[i][5] + ') : ' + tmp_bossTime[i].strftime('%H:%M:%S') + ' @ ' + tmp_bossTime[i].strftime('%Y-%m-%d') + ' (멍 ' + str(bossMungCnt[i]) + '회)' + ' * ' + bossData[i][6] + '\n'
+							information1 += ' - ' + bossData[i][0] + '(' + bossData[i][1] + '.' + bossData[i][5] + ') : ' + tmp_bossTime[i].strftime('%H:%M:%S') + ' @ ' + tmp_bossTime[i].strftime('%Y-%m-%d') + ' (Fake Spawn ' + str(bossMungCnt[i]) + 'times)' + ' * ' + bossData[i][6] + '\n'
 					else:
 						if bossData[i][2] == '0' :
-							information1 += ' - ' + bossData[i][0] + '(' + bossData[i][1] + '.' + bossData[i][5] + ') : ' + bossTimeString[i] + ' @ ' + bossDateString[i] + ' (미입력 ' + str(bossMungCnt[i]) + '회)' + ' * ' + bossData[i][6] + '\n'
+							information1 += ' - ' + bossData[i][0] + '(' + bossData[i][1] + '.' + bossData[i][5] + ') : ' + bossTimeString[i] + ' @ ' + bossDateString[i] + ' (No Input ' + str(bossMungCnt[i]) + 'times)' + ' * ' + bossData[i][6] + '\n'
 						else : 
-							information1 += ' - ' + bossData[i][0] + '(' + bossData[i][1] + '.' + bossData[i][5] + ') : ' + bossTimeString[i] + ' @ ' + bossDateString[i] + ' (멍 ' + str(bossMungCnt[i]) + '회)' + ' * ' + bossData[i][6] + '\n'
+							information1 += ' - ' + bossData[i][0] + '(' + bossData[i][1] + '.' + bossData[i][5] + ') : ' + bossTimeString[i] + ' @ ' + bossDateString[i] + ' (Fake Spawn ' + str(bossMungCnt[i]) + 'times)' + ' * ' + bossData[i][6] + '\n'
 						
 	try :
 		contents = repo.get_contents("my_bot.db")
@@ -818,9 +818,9 @@ async def LadderFunc(number, ladderlist, channelVal):
 	lose_member = [item for item in ladderlist if item not in result_ladder]
 	result_ladderSTR = ','.join(map(str, result_ladder))
 	embed = discord.Embed(title  = "🎲 SNAKE!",color=0x00ff00)
-	embed.add_field(name = "👥 참가자", value =  f"```fix\n{', '.join(ladderlist)}```", inline=False)
-	embed.add_field(name = "😍 당첨", value =  f"```fix\n{', '.join(result_ladder)}```")
-	embed.add_field(name = "😭 낙첨", value =  f"```{', '.join(lose_member)}```")
+	embed.add_field(name = "👥 members", value =  f"```fix\n{', '.join(ladderlist)}```", inline=False)
+	embed.add_field(name = "😍 WINNER", value =  f"```fix\n{', '.join(result_ladder)}```")
+	embed.add_field(name = "😭 Try again...", value =  f"```{', '.join(lose_member)}```")
 	await channelVal.send(embed=embed, tts=False)
 
 #data초기화
@@ -1749,7 +1749,7 @@ class mainCog(commands.Cog):
 
 			await dbSave()
 
-			await ctx.send('< 초기화 완료 >', tts=False)
+			await ctx.send('< Reset Complete >', tts=False)
 			print ("< Reset Complete >")
 		else:
 			return
@@ -1883,7 +1883,7 @@ class mainCog(commands.Cog):
 
 		if ctx.message.channel.id == basicSetting[7] or ctx.message.channel.id == basicSetting[8]:
 			if not args:
-				return await ctx.send(f'```명령어 [인원] [아이디1] [아이디2] ... 형태로 입력해주시기 바랍나다.```')
+				return await ctx.send(f'```command [# of members] [IGN1] [ING2] ... ```')
 
 			ladder = args.split()
 
@@ -1891,10 +1891,10 @@ class mainCog(commands.Cog):
 				num_cong = int(ladder[0])  # 뽑을 인원
 				del(ladder[0])
 			except ValueError:
-				return await ctx.send(f'```뽑을 인원은 숫자로 입력바랍니다\nex)!사다리 1 가 나 다 ...```')
+				return await ctx.send(f'```# of winners\nex)!snake 1 IGN1 IGN2 IGN3 ...```')
 
 			if num_cong >= len(ladder):
-				return await ctx.send(f'```추첨인원이 총 인원과 같거나 많습니다. 재입력 해주세요```')
+				return await ctx.send(f'```# of winners are same as total or more. Please, re-enter```')
 			
 			if len(ladder) > 20:
 				await LadderFunc(num_cong, ladder, ctx)
@@ -1966,13 +1966,13 @@ class mainCog(commands.Cog):
 				else :
 					lose_member.append(f"{input_dict[f'{x}']}")
 
-			embed = discord.Embed(title  = "🎲 사다리! 묻고 더블로 가!",
+			embed = discord.Embed(title  = "🎲 Snake!",
 				color=0x00ff00
 				)
 			embed.description = f"||```{input_data}\n{''.join(ladder_data)}{' '.join(output_list)}```||"
-			embed.add_field(name = "👥 참가자", value =  f"```fix\n{', '.join(join_member)}```", inline=False)
-			embed.add_field(name = "😍 당첨", value =  f"```fix\n{', '.join(win_member)}```")
-			embed.add_field(name = "😭 낙첨", value =  f"```{', '.join(lose_member)}```")
+			embed.add_field(name = "👥 Members", value =  f"```fix\n{', '.join(join_member)}```", inline=False)
+			embed.add_field(name = "😍 Winner", value =  f"```fix\n{', '.join(win_member)}```")
+			embed.add_field(name = "😭 Try again...", value =  f"```{', '.join(lose_member)}```")
 			return await ctx.send(embed = embed)
 		else:
 			return
@@ -2200,7 +2200,7 @@ class mainCog(commands.Cog):
 					sorted_datelist.append(tmp_sorted_datelist[i])
 			
 			if len(sorted_datelist) == 0:
-				await ctx.send( '<보스타임 정보가 없습니다.>', tts=False)
+				await ctx.send( '<Boss info. is not available.>', tts=False)
 			else : 
 				result_lefttime = ''
 				
@@ -2214,7 +2214,7 @@ class mainCog(commands.Cog):
 								hours, remainder = divmod(total_seconds,60*60)
 								minutes, seconds = divmod(remainder,60)
 
-								result_lefttime += '다음 ' + ouput_bossData[i][0] + '탐까지 %02d:%02d:%02d 남았습니다. ' % (hours,minutes,seconds) + '[' +  ouput_bossData[i][2] + ']\n'
+								result_lefttime += 'Next respawn time for ' + ouput_bossData[i][0] + ' is %02d:%02d:%02d . ' % (hours,minutes,seconds) + '[' +  ouput_bossData[i][2] + ']\n'
 				else :
 					for j in range(len(sorted_datelist)):
 						for i in range(len(ouput_bossData)):						
@@ -2225,7 +2225,7 @@ class mainCog(commands.Cog):
 								hours, remainder = divmod(total_seconds,60*60)
 								minutes, seconds = divmod(remainder,60)
 
-								result_lefttime += '다음 ' + ouput_bossData[i][0] + '탐까지 %02d:%02d:%02d 남았습니다. ' % (hours,minutes,seconds) + '[' +  ouput_bossData[i][2] + ']\n'
+								result_lefttime += 'Next respawn time for ' + ouput_bossData[i][0] + ' is %02d:%02d:%02d . ' % (hours,minutes,seconds) + '[' +  ouput_bossData[i][2] + ']\n'
 				embed = discord.Embed(
 					description= result_lefttime,
 					color=0xff0000
@@ -2863,10 +2863,10 @@ class mainCog(commands.Cog):
 			field_size = 60
 			tmp_race_tab = 35 - len(racing_member)
 			if len(racing_member) <= 1:
-				await ctx.send('레이스 인원이 2명보다 작습니다.')
+				await ctx.send('Total racers are lower than two.')
 				return
 			elif len(racing_member) >= 13:
-				await ctx.send('레이스 인원이 12명 초과입니다.')
+				await ctx.send('Total racers must be 12 or lower.')
 				return
 			else :
 				race_val = random.sample(range(tmp_race_tab, tmp_race_tab+len(racing_member)), len(racing_member))
@@ -3364,7 +3364,7 @@ class mainCog(commands.Cog):
 
 		if ctx.message.channel.id == basicSetting[7] or ctx.message.channel.id == basicSetting[20]:
 			if not args:
-				return await ctx.send(f"**{command[35][0]} [판매금액] (거래소세금)** 양식으로 입력 해주세요\n※ 거래소세금은 미입력시 5%입니다.")
+				return await ctx.send(f"**{command[35][0]} [Sold Price] (Tax Rate)** please, re-enter with followig format\n※ Default Market Tax Rate is 5%.")
 			
 			input_money_data : list = args.split()
 			len_input_money_data = len(input_money_data)
@@ -3373,10 +3373,10 @@ class mainCog(commands.Cog):
 				for i in range(len_input_money_data):
 					input_money_data[i] = int(input_money_data[i])
 			except ValueError:
-				return await ctx.send(f"**[판매금액] (거래소세금)**은 숫자로 입력 해주세요.")
+				return await ctx.send(f"**[Sold Price] (Tax Rate)**Must enter in numbers.")
 
 			if len_input_money_data < 1 or len_input_money_data > 3:
-				return await ctx.send(f"**{command[35][0]} [판매금액] (거래소세금)** 양식으로 입력 해주세요\n※ 거래소세금은 미입력시 5%입니다.")
+				return await ctx.send(f"**{command[35][0]} [Sold Price] (Tax rate)** please, re-enter with followig format\n※ Default Market Tax Rate is 5%.")
 			elif len_input_money_data == 2:
 				tax = input_money_data[1]
 			else:
@@ -3387,13 +3387,13 @@ class mainCog(commands.Cog):
 			price_rev_tax = int((input_money_data[0] * 100)/(100-tax)+0.5)
 
 			embed = discord.Embed(
-					title = f"🧮  수수료 계산결과 (세율 {tax}% 기준) ",
+					title = f"🧮  Fee Calculation Result (Tax {tax}% ) ",
 					description = f"",
 					color=0x00ff00
 					)
-			embed.add_field(name = "⚖️ 수수료 지원", value = f"```등록가 : {price_rev_tax}\n수령가 : {input_money_data[0]}\n세 금 : {price_rev_tax-input_money_data[0]}```")
-			embed.add_field(name = "⚖️ 1차 거래", value = f"```등록가 : {input_money_data[0]}\n정산가 : {price_first_tax}\n세 금 : {input_money_data[0]-price_first_tax}```")
-			embed.add_field(name = "⚖️ 2차 거래", value = f"```등록가 : {price_first_tax}\n정산가 : {price_second_tax}\n세 금 : {price_first_tax-price_second_tax}```")
+			embed.add_field(name = "⚖️ Tax Covered", value = f"```Market Price : {price_rev_tax}\nEarnings : {input_money_data[0]}\nTax : {price_rev_tax-input_money_data[0]}```")
+			embed.add_field(name = "⚖️ Tax Not Covered", value = f"```Market Price : {input_money_data[0]}\nEarnings : {price_first_tax}\nTax : {input_money_data[0]-price_first_tax}```")
+			embed.add_field(name = "⚖️ After Tax", value = f"```Market Price : {price_first_tax}\nEarnings : {price_second_tax}\nTax : {price_first_tax-price_second_tax}```")
 			return await ctx.send(embed = embed)
 		else:
 			return
@@ -4050,7 +4050,7 @@ class IlsangDistributionBot(commands.AutoShardedBot):
 
 				for i in range(bossNum):
 					################ 보스 컷처리 ################ 
-					if message.content.startswith(bossData[i][0] +'DOWN') or message.content.startswith(convertToInitialLetters(bossData[i][0] +'컷')) or message.content.startswith(bossData[i][0] +' 컷') or message.content.startswith(convertToInitialLetters(bossData[i][0] +' Down')):
+					if message.content.startswith(bossData[i][0] +'DOWN') or message.content.startswith(convertToInitialLetters(bossData[i][0] +'컷')) or message.content.startswith(bossData[i][0] +' 컷') or message.content.startswith(convertToInitialLetters(bossData[i][0] +'down')):
 						if hello.find('  ') != -1 :
 							bossData[i][6] = hello[hello.find('  ')+2:]
 							hello = hello[:hello.find('  ')]
@@ -4114,7 +4114,7 @@ class IlsangDistributionBot(commands.AutoShardedBot):
 
 					################ 보스 멍 처리 ################ 
 
-					if message.content.startswith(bossData[i][0] +'FAKE') or message.content.startswith(bossData[i][0] +' FAKE'):
+					if message.content.startswith(bossData[i][0] +'FAKE') or message.content.startswith(bossData[i][0] +'fake'):
 						if hello.find('  ') != -1 :
 							bossData[i][6] = hello[hello.find('  ')+2:]
 							hello = hello[:hello.find('  ')]
@@ -4190,12 +4190,12 @@ class IlsangDistributionBot(commands.AutoShardedBot):
 										)
 								await self.get_channel(channel).send(embed=embed, tts=False)
 							else:
-								await self.get_channel(channel).send('```' + bossData[i][0] + '탐이 아직 안됐습니다. 다음 ' + bossData[i][0] + '탐 [' + tmp_bossTimeString[i] + '] 입니다```', tts=False)
+								await self.get_channel(channel).send('```' + bossData[i][0] + 'Next Respawn time for ' + bossData[i][0] + ' [' + tmp_bossTimeString[i] + '] ```', tts=False)
 
 						
 				################ 예상 보스 타임 입력 ################ 
 
-					if message.content.startswith(bossData[i][0] +'EST')  or message.content.startswith(bossData[i][0] +' EST'):
+					if message.content.startswith(bossData[i][0] +'EST')  or message.content.startswith(bossData[i][0] +'est'):
 						if hello.find('  ') != -1 :
 							bossData[i][6] = hello[hello.find('  ')+2:]
 							hello = hello[:hello.find('  ')]
