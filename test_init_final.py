@@ -4114,14 +4114,14 @@ class IlsangDistributionBot(commands.AutoShardedBot):
 
 					################ 보스 멍 처리 ################ 
 
-					if message.content.startswith(bossData[i][0] +'멍') or message.content.startswith(bossData[i][0] +' 멍'):
+					if message.content.startswith(bossData[i][0] +'FAKE') or message.content.startswith(bossData[i][0] +' FAKE'):
 						if hello.find('  ') != -1 :
 							bossData[i][6] = hello[hello.find('  ')+2:]
 							hello = hello[:hello.find('  ')]
 						else:
 							bossData[i][6] = ''
 							
-						tmp_msg = bossData[i][0] +'멍'
+						tmp_msg = bossData[i][0] +'Fake Spawn'
 						tmp_now = datetime.datetime.now() + datetime.timedelta(hours = int(basicSetting[0]))
 
 						if len(hello) > len(tmp_msg) + 3 :
@@ -4195,14 +4195,14 @@ class IlsangDistributionBot(commands.AutoShardedBot):
 						
 				################ 예상 보스 타임 입력 ################ 
 
-					if message.content.startswith(bossData[i][0] +'예상')  or message.content.startswith(bossData[i][0] +' 예상'):
+					if message.content.startswith(bossData[i][0] +'EST')  or message.content.startswith(bossData[i][0] +' EST'):
 						if hello.find('  ') != -1 :
 							bossData[i][6] = hello[hello.find('  ')+2:]
 							hello = hello[:hello.find('  ')]
 						else:
 							bossData[i][6] = ''
 							
-						tmp_msg = bossData[i][0] +'예상'
+						tmp_msg = bossData[i][0] +'Estimate'
 						if len(hello) > len(tmp_msg) + 4 :
 							if hello.find(':') != -1 :
 								chkpos = hello.find(':')
@@ -4237,16 +4237,16 @@ class IlsangDistributionBot(commands.AutoShardedBot):
 								bossFlag0[i] = True		
 									
 							embed = discord.Embed(
-									description= '```다음 ' + bossData[i][0] + ' ' + bossTimeString[i] + '입니다.```',
+									description= '```Next Respawn for ' + bossData[i][0] + ' ' + bossTimeString[i] + '.```',
 									color=0xff0000
 									)
 							await self.get_channel(channel).send(embed=embed, tts=False)
 						else:
-							await self.get_channel(channel).send('```' + bossData[i][0] +' 예상 시간을 입력해주세요.```', tts=False)
+							await self.get_channel(channel).send('```' + bossData[i][0] +' time value is missing.```', tts=False)
 							
 					################ 보스타임 삭제 ################
 						
-					if message.content == bossData[i][0] +'삭제' or message.content == bossData[i][0] +' 삭제':
+					if message.content == bossData[i][0] +'DEL' or message.content == bossData[i][0] +' DEL':
 						bossTime[i] = datetime.datetime.now()+datetime.timedelta(days=365, hours = int(basicSetting[0]))
 						tmp_bossTime[i] =  datetime.datetime.now()+datetime.timedelta(days=365, hours = int(basicSetting[0]))
 						bossTimeString[i] = '99:99:99'
@@ -4257,9 +4257,9 @@ class IlsangDistributionBot(commands.AutoShardedBot):
 						bossFlag0[i] = False
 						bossMungFlag[i] = False
 						bossMungCnt[i] = 0
-						await self.get_channel(channel).send('<' + bossData[i][0] + ' 삭제완료>', tts=False)
+						await self.get_channel(channel).send('<' + bossData[i][0] + ' Deleted>', tts=False)
 						await dbSave()
-						print ('<' + bossData[i][0] + ' 삭제완료>')
+						print ('<' + bossData[i][0] + ' Deleted>')
 					
 					################ 보스별 메모 ################ 
 
