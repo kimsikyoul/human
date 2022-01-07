@@ -3965,10 +3965,10 @@ class IlsangDistributionBot(commands.AutoShardedBot):
 					basicSetting[20] = ""
 					print(f"아이템채널 ID 오류! [{command[28][0]} 아이템] 명령으로 재설정 바랍니다.")
 			if int(basicSetting[13]) != 0 :
-				print('< 보탐봇 재시작 시간 ' + endTime.strftime('%Y-%m-%d ') + endTime.strftime('%H:%M:%S') + ' >')
-				print('< 보탐봇 재시작 주기 ' + basicSetting[13] + '일 >')
+				print('< Human Bot Restart Time ' + endTime.strftime('%Y-%m-%d ') + endTime.strftime('%H:%M:%S') + ' >')
+				print('< Human Bot Restart Cycle ' + basicSetting[13] + '일 >')
 			else :
-				print('< 보탐봇 재시작 설정안됨 >')
+				print('< Human Bot Restart Cycle is not set >')
 			chflg = 1
 		else:
 			basicSetting[6] = ""
@@ -4039,7 +4039,7 @@ class IlsangDistributionBot(commands.AutoShardedBot):
 				channel = basicSetting[7]
 				message = msg
 
-				for command_str in ["", "멍", "예상", "삭제", "메모", "카톡켬", "카톡끔"]:
+				for command_str in ["컷", "멍", "예상", "삭제", "메모", "카톡켬", "카톡끔"]:
 					if command_str in message.content:
 						tmp_msg : str = ""
 						for key, value in boss_nick.items():
