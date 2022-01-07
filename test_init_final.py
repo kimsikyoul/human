@@ -559,7 +559,7 @@ async def MakeSound(saveSTR, filename):
 			TextType = "ssml",
 			Text=s,
 			OutputFormat="mp3",
-			VoiceId="Seoyeon")
+			VoiceId="Joanna")
 
 		stream = response.get("AudioStream")
 
@@ -567,7 +567,7 @@ async def MakeSound(saveSTR, filename):
 			data = stream.read()
 			mp3file.write(data)
 	else:	
-		tts = gTTS(saveSTR, lang = 'ko')
+		tts = gTTS(saveSTR, lang = 'en')
 		tts.save(f"./{filename}.wav")
 
 #mp3 파일 재생함수	
