@@ -1454,7 +1454,7 @@ class mainCog(commands.Cog):
 					)
 			embed.add_field(
 					name="----- Additional Funtion -----",
-					value= '```- [보스명]컷/멍/예상  [할말] : 보스시간 입력 후 빈칸 두번!! 메모 가능\n- [보스명]컷 명령어는 초성으로 입력가능합니다.\n  ex)' + bossData[0][0] + '컷 => ' + convertToInitialLetters(bossData[0][0] +'컷') + ', ' + bossData[0][0] + ' 컷 => ' + convertToInitialLetters(bossData[0][0] +' 컷') + '```'
+					value= '```- [BossName]DOWN/FAKE/EST  [할말] : 보스시간 입력 후 빈칸 두번!! 메모 가능\n- [보스명]컷 명령어는 초성으로 입력가능합니다.\n  ex)' + bossData[0][0] + '컷 => ' + convertToInitialLetters(bossData[0][0] +'컷') + ', ' + bossData[0][0] + ' 컷 => ' + convertToInitialLetters(bossData[0][0] +' 컷') + '```'
 					)
 			await ctx.send( embed=embed, tts=False)
 		else:
@@ -3727,7 +3727,7 @@ class mainCog(commands.Cog):
 					bossFlag0[i] = True
 				result_boss_name.append(bossData[i][0])
 
-		return await ctx.send(f"```[{', '.join(result_boss_name)}] Boss is added on the Time Table. [{command[22][0]}]으로 등록시간을 확인해보세요```", tts=False)
+		return await ctx.send(f"```[{', '.join(result_boss_name)}] Boss is added on the Time Table. Check the boss with [{command[22][0]}]```", tts=False)
 
 	################ 예상등록 ################ 
 	@commands.command(name=command[44][0], aliases=command[44][1:])
@@ -3736,7 +3736,7 @@ class mainCog(commands.Cog):
 			return
 			
 		if not args:
-			return await ctx.send('```보스타임 정보를 입력해주세요```', tts=False)
+			return await ctx.send('```Please, Enter the boss information```', tts=False)
 
 		boss_data_list : list = args.split("\n")
 		boss_data_dict : dict = {}
@@ -3757,9 +3757,9 @@ class mainCog(commands.Cog):
 					tmp_minute = int(tmp_boss_time[tmp_boss_time.rfind(":")+1:])
 					tmp_second = 0
 				if tmp_hour > 23 or tmp_hour < 0 or tmp_minute > 60 or tmp_second > 60:
-					return await ctx.send(f"**[{tmp_boss_name}]**의 올바른 시간(00:00:00 ~ 23:59:59)을 입력해주세요. ")
+					return await ctx.send(f"**[{tmp_boss_name}]** correct time format is (00:00:00 ~ 23:59:59). ")
 			except:
-				return await ctx.send(f"**[{tmp_boss_name}]**의 올바른 시간(00:00:00 ~ 23:59:59)을 입력해주세요. ")
+				return await ctx.send(f"**[{tmp_boss_name}]** correct time format is (00:00:00 ~ 23:59:59). ")
 
 			if "@" != boss_data[0]:
 				boss_data_dict[tmp_boss_name] = {"hour" : tmp_hour, "minute" : tmp_minute, "second" : tmp_second}
@@ -3789,7 +3789,7 @@ class mainCog(commands.Cog):
 					bossFlag0[i] = True
 				result_boss_name.append(bossData[i][0])
 
-		return await ctx.send(f"```[{', '.join(result_boss_name)}] 보스 [예상등록]이 완료되었습니다. [{command[22][0]}]으로 등록시간을 확인해보세요```", tts=False)
+		return await ctx.send(f"```[{', '.join(result_boss_name)}] Boss [Estimation] is now COMPLETE. [{command[22][0]}]```", tts=False)
 
 	################ 추가등록 ################ 
 	@commands.command(name=command[45][0], aliases=command[45][1:])
@@ -4050,7 +4050,7 @@ class IlsangDistributionBot(commands.AutoShardedBot):
 
 				for i in range(bossNum):
 					################ 보스 컷처리 ################ 
-					if message.content.startswith(bossData[i][0] +'DOWN') or message.content.startswith(convertToInitialLetters(bossData[i][0] +'컷')) or message.content.startswith(bossData[i][0] +' 컷') or message.content.startswith(convertToInitialLetters(bossData[i][0] +' DOWN')):
+					if message.content.startswith(bossData[i][0] +'DOWN') or message.content.startswith(convertToInitialLetters(bossData[i][0] +'down')) or message.content.startswith(bossData[i][0] +' down') or message.content.startswith(convertToInitialLetters(bossData[i][0] +' DOWN')):
 						if hello.find('  ') != -1 :
 							bossData[i][6] = hello[hello.find('  ')+2:]
 							hello = hello[:hello.find('  ')]
@@ -4114,7 +4114,7 @@ class IlsangDistributionBot(commands.AutoShardedBot):
 
 					################ 보스 멍 처리 ################ 
 
-					if message.content.startswith(bossData[i][0] +'FAKE') or message.content.startswith(bossData[i][0] +' FAKE'):
+					if message.content.startswith(bossData[i][0] +'FAKE') or message.content.startswith(bossData[i][0] +' FAKE') or message.content.startswith(bossData[i][0] +'fake') or message.content.startswith(bossData[i][0] +' fake'):
 						if hello.find('  ') != -1 :
 							bossData[i][6] = hello[hello.find('  ')+2:]
 							hello = hello[:hello.find('  ')]
@@ -4195,7 +4195,7 @@ class IlsangDistributionBot(commands.AutoShardedBot):
 						
 				################ 예상 보스 타임 입력 ################ 
 
-					if message.content.startswith(bossData[i][0] +'EST')  or message.content.startswith(bossData[i][0] +' EST'):
+					if message.content.startswith(bossData[i][0] +'EST')  or message.content.startswith(bossData[i][0] +' EST')  or message.content.startswith(bossData[i][0] +'est')  or message.content.startswith(bossData[i][0] +' est'):
 						if hello.find('  ') != -1 :
 							bossData[i][6] = hello[hello.find('  ')+2:]
 							hello = hello[:hello.find('  ')]
@@ -4246,7 +4246,7 @@ class IlsangDistributionBot(commands.AutoShardedBot):
 							
 					################ 보스타임 삭제 ################
 						
-					if message.content == bossData[i][0] +'DEL' or message.content == bossData[i][0] +' DEL':
+					if message.content == bossData[i][0] +'DEL' or message.content == bossData[i][0] +' DEL' or message.content == bossData[i][0] +'del' or message.content == bossData[i][0] +' del':
 						bossTime[i] = datetime.datetime.now()+datetime.timedelta(days=365, hours = int(basicSetting[0]))
 						tmp_bossTime[i] =  datetime.datetime.now()+datetime.timedelta(days=365, hours = int(basicSetting[0]))
 						bossTimeString[i] = '99:99:99'
