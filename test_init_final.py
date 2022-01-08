@@ -4050,7 +4050,7 @@ class IlsangDistributionBot(commands.AutoShardedBot):
 
 				for i in range(bossNum):
 					################ 보스 컷처리 ################ 
-					if message.content.startswith(bossData[i][0] +'DOWN') or message.content.startswith(convertToInitialLetters(bossData[i][0] +'down')) or message.content.startswith(bossData[i][0] +' down') or message.content.startswith(convertToInitialLetters(bossData[i][0] +' DOWN')):
+					if message.content.startswith(bossData[i][0] +'DOWN') or message.content.startswith(convertToInitialLetters(bossData[i][0] +'컷')) or message.content.startswith(bossData[i][0] +' 컷') or message.content.startswith(convertToInitialLetters(bossData[i][0] +' DOWN')):
 						if hello.find('  ') != -1 :
 							bossData[i][6] = hello[hello.find('  ')+2:]
 							hello = hello[:hello.find('  ')]
@@ -4114,7 +4114,7 @@ class IlsangDistributionBot(commands.AutoShardedBot):
 
 					################ 보스 멍 처리 ################ 
 
-					if message.content.startswith(bossData[i][0] +'FAKE') or message.content.startswith(bossData[i][0] +' FAKE') or message.content.startswith(bossData[i][0] +'fake') or message.content.startswith(bossData[i][0] +' fake'):
+					if message.content.startswith(bossData[i][0] +'FAKE') or message.content.startswith(bossData[i][0] +' FAKE'):
 						if hello.find('  ') != -1 :
 							bossData[i][6] = hello[hello.find('  ')+2:]
 							hello = hello[:hello.find('  ')]
@@ -4195,7 +4195,7 @@ class IlsangDistributionBot(commands.AutoShardedBot):
 						
 				################ 예상 보스 타임 입력 ################ 
 
-					if message.content.startswith(bossData[i][0] +'EST')  or message.content.startswith(bossData[i][0] +' EST')  or message.content.startswith(bossData[i][0] +'est')  or message.content.startswith(bossData[i][0] +' est'):
+					if message.content.startswith(bossData[i][0] +'EST')  or message.content.startswith(bossData[i][0] +' EST'):
 						if hello.find('  ') != -1 :
 							bossData[i][6] = hello[hello.find('  ')+2:]
 							hello = hello[:hello.find('  ')]
@@ -4246,7 +4246,7 @@ class IlsangDistributionBot(commands.AutoShardedBot):
 							
 					################ 보스타임 삭제 ################
 						
-					if message.content == bossData[i][0] +'DEL' or message.content == bossData[i][0] +' DEL' or message.content == bossData[i][0] +'del' or message.content == bossData[i][0] +' del':
+					if message.content == bossData[i][0] +'DEL' or message.content == bossData[i][0] +' DEL':
 						bossTime[i] = datetime.datetime.now()+datetime.timedelta(days=365, hours = int(basicSetting[0]))
 						tmp_bossTime[i] =  datetime.datetime.now()+datetime.timedelta(days=365, hours = int(basicSetting[0]))
 						bossTimeString[i] = '99:99:99'
