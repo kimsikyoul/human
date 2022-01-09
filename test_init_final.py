@@ -1258,7 +1258,7 @@ class taskCog(commands.Cog):
 					continue
 				t.cancel()
 		await dbSave()
-		await data_list_Save("kill_list.ini", "-----척살명단-----", kill_Data)
+		await data_list_Save("kill_list.ini", "-----킬목록-----", kill_Data)
 		await data_list_Save("item_list.ini", "-----아이템목록-----", item_Data)
 
 		boss_task = asyncio.Task(self.boss_check())
