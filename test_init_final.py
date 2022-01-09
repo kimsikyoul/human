@@ -1298,15 +1298,15 @@ class mainCog(commands.Cog):
 			contents = repo.get_contents("test_setting.ini")
 			repo.update_file(contents.path, "test_setting", result_textCH, contents.sha)
 
-			await ctx.send(f"< 텍스트채널 [{ctx.message.channel.name}] 접속완료 >\n< 음성채널 접속 후 [{command[5][0]}] 명령을 사용 하세요 >", tts=False)
+			await ctx.send(f"< Text Channel [{ctx.message.channel.name}] Access Complete! >\n< Join Voice Channel then enter [{command[5][0]}]  >", tts=False)
 			
-			print('< 텍스트채널 [' + ctx.guild.get_channel(basicSetting[7]).name + '] 접속완료>')
+			print('< Text Channel [' + ctx.guild.get_channel(basicSetting[7]).name + '] Access Complete!>')
 			if basicSetting[6] != "" and basicSetting[21] == "1":
 				try:
 					await ctx.guild.get_channel(basicSetting[6]).connect(reconnect=True, timeout=5)
-					print('< 음성채널 [' + ctx.guild.get_channel(basicSetting[6]).name + '] 접속완료>')
+					print('< Voice Channel [' + ctx.guild.get_channel(basicSetting[6]).name + '] Access Complete>')
 				except:
-					print('< 음성채널 [' + ctx.guild.get_channel(basicSetting[6]).name + '] 접속에러! >')
+					print('< Unable to Join [' + ctx.guild.get_channel(basicSetting[6]).name + '] ! >')
 					pass
 			if basicSetting[8] != "":
 				if str(basicSetting[8]) in channel_id:
@@ -1339,10 +1339,10 @@ class mainCog(commands.Cog):
 					basicSetting[20] = ""
 					print(f"아이템채널 ID 오류! [{command[28][0]} 아이템] 명령으로 재설정 바랍니다.")
 			if int(basicSetting[13]) != 0 :
-				print('< 보탐봇 재시작 시간 ' + endTime.strftime('%Y-%m-%d ') + endTime.strftime('%H:%M:%S') + ' >')
-				print('< 보탐봇 재시작 주기 ' + basicSetting[13] + '일 >')
+				print('< Human Bot Restart time ' + endTime.strftime('%Y-%m-%d ') + endTime.strftime('%H:%M:%S') + ' >')
+				print('< Human Bot Restart cycle ' + basicSetting[13] + '일 >')
 			else :
-				print('< 보탐봇 재시작 설정안됨 >')
+				print('< Restart cycle is not set >')
 
 			chflg = 1
 		else:
@@ -1632,7 +1632,7 @@ class mainCog(commands.Cog):
 						await ctx.send('음성채널에 접속에 실패하였습니다.', tts=False)	
 						pass
 				else:
-					await ctx.send('음성채널에 먼저 들어가주세요.', tts=False)
+					await ctx.send('Join Voice Channel first.', tts=False)
 					return
 			else:
 				if ctx.voice_client.is_playing():
@@ -1677,7 +1677,7 @@ class mainCog(commands.Cog):
 				contents = repo.get_contents("test_setting.ini")
 				repo.update_file(contents.path, "test_setting", result_voiceCH, contents.sha)
 
-			await ctx.send('< 음성채널 [' + self.bot.get_channel(voice_channel.id).name + '] 접속완료>', tts=False)
+			await ctx.send('< Voice Channel is set [' + self.bot.get_channel(voice_channel.id).name + '] >', tts=False)
 		else:
 			return
 
@@ -3727,7 +3727,7 @@ class mainCog(commands.Cog):
 					bossFlag0[i] = True
 				result_boss_name.append(bossData[i][0])
 
-		return await ctx.send(f"```[{', '.join(result_boss_name)}] Boss is added on the Time Table. [{command[22][0]}]으로 등록시간을 확인해보세요```", tts=False)
+		return await ctx.send(f"```[{', '.join(result_boss_name)}] Boss is added on the Time Table. Enter [{command[22][0]}] to check```", tts=False)
 
 	################ 예상등록 ################ 
 	@commands.command(name=command[44][0], aliases=command[44][1:])
@@ -3736,7 +3736,7 @@ class mainCog(commands.Cog):
 			return
 			
 		if not args:
-			return await ctx.send('```보스타임 정보를 입력해주세요```', tts=False)
+			return await ctx.send('```Please, enter the Boss down time```', tts=False)
 
 		boss_data_list : list = args.split("\n")
 		boss_data_dict : dict = {}
@@ -3757,9 +3757,9 @@ class mainCog(commands.Cog):
 					tmp_minute = int(tmp_boss_time[tmp_boss_time.rfind(":")+1:])
 					tmp_second = 0
 				if tmp_hour > 23 or tmp_hour < 0 or tmp_minute > 60 or tmp_second > 60:
-					return await ctx.send(f"**[{tmp_boss_name}]**의 올바른 시간(00:00:00 ~ 23:59:59)을 입력해주세요. ")
+					return await ctx.send(f"**[{tmp_boss_name}]** (00:00:00 ~ 23:59:59). ")
 			except:
-				return await ctx.send(f"**[{tmp_boss_name}]**의 올바른 시간(00:00:00 ~ 23:59:59)을 입력해주세요. ")
+				return await ctx.send(f"**[{tmp_boss_name}]** (00:00:00 ~ 23:59:59). ")
 
 			if "@" != boss_data[0]:
 				boss_data_dict[tmp_boss_name] = {"hour" : tmp_hour, "minute" : tmp_minute, "second" : tmp_second}
@@ -3789,7 +3789,7 @@ class mainCog(commands.Cog):
 					bossFlag0[i] = True
 				result_boss_name.append(bossData[i][0])
 
-		return await ctx.send(f"```[{', '.join(result_boss_name)}] 보스 [예상등록]이 완료되었습니다. [{command[22][0]}]으로 등록시간을 확인해보세요```", tts=False)
+		return await ctx.send(f"```[{', '.join(result_boss_name)}]'s [estimation] is now complete. Enter [{command[22][0]}] to check```", tts=False)
 
 	################ 추가등록 ################ 
 	@commands.command(name=command[45][0], aliases=command[45][1:])
@@ -3798,7 +3798,7 @@ class mainCog(commands.Cog):
 			return
 
 		if not args:
-			return await ctx.send(f"```[{command[45][0]}] [시간(00:00)] [추가시간(숫자)] [보스명1] [보스명2] [보스명3] ... 양식으로 입력해주세요```", tts=False)
+			return await ctx.send(f"```[{command[45][0]}] [(00:00)] [추가시간(숫자)] [보스명1] [보스명2] [보스명3] ... 양식으로 입력해주세요```", tts=False)
 
 		input_data_list : list = []
 		input_data_list = args.split()
@@ -4290,7 +4290,7 @@ class IlsangDistributionBot(commands.AutoShardedBot):
 
 	async def close(self):
 		await super().close()
-		print("일상디코봇 종료 완료.")
+		print("Human Bot is now closing.")
 
 ilsang_distribution_bot : IlsangDistributionBot = IlsangDistributionBot()
 ilsang_distribution_bot.add_cog(mainCog(ilsang_distribution_bot))
