@@ -3973,7 +3973,7 @@ class IlsangDistributionBot(commands.AutoShardedBot):
 		else:
 			basicSetting[6] = ""
 			basicSetting[7] = ""
-			print(f"설정된 채널 값이 없거나 잘못 됐습니다. **[{command[0][0]}]** 명령어 먼저 입력하여 사용해주시기 바랍니다.")
+			print(f"Channel is not assigned. Please, enter command **[{command[0][0]}]** to set the channel.")
 
 		# 디스코드에는 현재 본인이 어떤 게임을 플레이하는지 보여주는 기능이 있습니다.
 		# 이 기능을 사용하여 봇의 상태를 간단하게 출력해줄 수 있습니다.
