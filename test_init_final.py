@@ -712,7 +712,7 @@ async def dbLoad():
 
 					if beforeBossData[i+1][tmp_msglen-4:tmp_msglen-3] != 0 and beforeBossData[i+1][tmp_msglen-5:tmp_msglen-4] == ' ':
 						bossMungCnt[j] = int(beforeBossData[i+1][tmp_msglen-4:tmp_msglen-3]) + tmp_mungcnt
-					elif beforeBossData[i+1][tmp_msglen-5:tmp_msglen-4] != ' ':
+					elif beforeBossData[i+1][tmp_msglen-5:tmp_msglen-4] !== ' ':
 						bossMungCnt[j] = int(beforeBossData[i+1][tmp_msglen-5:tmp_msglen-4] + beforeBossData[i+1][tmp_msglen-4:tmp_msglen-3]) + tmp_mungcnt
 					else:
 						bossMungCnt[j] = 0
